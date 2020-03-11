@@ -4,6 +4,11 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 <title></title>
 <link href="css/style.css" rel="stylesheet" type="text/css" />
+	<script>
+		function changeNum(id,num) {
+			window.href = "goodSvl?method=addCar&id="+id+"&quantity="+num;
+		}
+	</script>
 </head>
 <body>
 <!--LOGO欢迎信息和登陆注册功能-->
@@ -54,14 +59,18 @@
 				<th bgcolor="#ffffff">小计</th>
 				<th bgcolor="#ffffff">操作</th>
 			</tr>
-			<tr>
-				<td bgcolor="#ffffff" align="center">001</td>
-				<td bgcolor="#ffffff" align="center">aaaa</td>
-				<td bgcolor="#ffffff" align="center">11</td>
-				<td bgcolor="#ffffff" align="center"><input type="text" value="2"/></td>
-				<td bgcolor="#ffffff" align="center">123</td>
-				<td bgcolor="#ffffff" align="center"><a href="##">删除</a></td>
-			</tr>
+			<c:forEach items="${car.carMap}" var="entry">
+				<tr>
+					<td bgcolor="#ffffff" align="center">${entry.value.good.id}</td>
+					<td bgcolor="#ffffff" align="center">${entry.value.good.gname}</td>
+					<td bgcolor="#ffffff" align="center">${entry.value.good.price}</td>
+					<td bgcolor="#ffffff" align="center">
+						<input type="text" size="5" value="${entry.value.quantity}" onblur="changeNum(${entry.value.good.id},this.value)"/>
+					</td>
+					<td bgcolor="#ffffff" align="center">${entry.value.money}</td>
+					<td bgcolor="#ffffff" align="center"><a href="##">删除</a></td>
+				</tr>
+			</c:forEach>
 		</table>
 		<table width="99%" align="center" border="0" cellpadding="5" cellspacing="1" bgcolor="#dddddd">
 			<tr>
@@ -78,7 +87,7 @@
 	<table width="99%" align="center" border="0" cellpadding="5" cellspacing="0" bgcolor="#dddddd">
 		<tr>
 			<td bgcolor="#ffffff">
-				<a href="###"><img src="images/continue.gif" alt="continue" /></a>
+				<a href="main.jsp"><img src="images/continue.gif" alt="continue" /></a>
 			</td>
 			<td bgcolor="#ffffff" align="right">
 				<a href="flow.php-step=checkout.htm"><img src="images/checkout.gif" alt="checkout" /></a>

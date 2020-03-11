@@ -9,11 +9,16 @@ import java.util.List;
 import java.util.Map;
 
 public class GoodDao {
-    public boolean insertGood(Good good){
-        String sql = "insert into good(gname,gtype,price,pic) values(?,?,?,?)";
-        boolean result = JdbcUtil.executeUpdate(sql, good.getGname(), good.getGtype(), good.getPrice(), good.getPic());
-        return result;
-    }
+   public Good findGood(Integer id){
+       Good good = new Good();
+       String sql = "select * from good where id = ?";
+       Map<String, Object> map = JdbcUtil.queryForRow(sql, id);
+       good.setId(Integer.valueOf(map.get("id").toString()));
+       good.setGname(map.get("gname").toString());
+       good.setGtype(map.get("gtype").toString());
+       good.setPrice(Double.valueOf(map.get("price").toString()));
+       return good;
+   }
     
     public List<Good> queryAll(String gtype, PageBean<Good> pb){
         String sql = "select * from good where gtype=? order by id limit ?,?";
@@ -31,7 +36,7 @@ public class GoodDao {
         return goodList;
     }
     public List<String > queryGtype(){
-        String sql = "select gtype from good ";
+        String sql = "select distinct(gtype) from good ";
         
         List<String> maps = JdbcUtil.queryForRows(String.class,sql);
         

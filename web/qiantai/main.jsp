@@ -69,7 +69,7 @@
 					<c:forEach items="${allGtype}" var="type">
 						<dl>
 							<dt>
-								<a href="category.php-id=12.htm">${type}</a>
+								<a href="goodSvl?method=queryGood&gtype=${type}">${type}</a>
 							</dt>
 						</dl>
 					</c:forEach>
@@ -88,9 +88,9 @@
 					<c:forEach items="${pb.list}" var="good">
 						<div class="goodsItem">
 							<span class="best"></span>
-							<a href="flow.jsp">
-								<img src="" alt="测试商品1" class="goodsimg" /></a>
-							<p><a href="flow.jsp" title="测试商品1">${good.gname}</a></p>
+							<a href="goodSvl?method=addCar&id=${good.id}">
+								<img src="" alt="${good.gname}" class="goodsimg" /></a>
+							<p><a href="goodSvl?method=addCar&id=${good.id}">${good.gname}</a></p>
 							<font class="f1">￥${good.price}元</font>
 						</div>
 					</c:forEach>
