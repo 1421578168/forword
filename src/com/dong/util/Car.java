@@ -1,5 +1,6 @@
 package com.dong.util;
 
+import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -17,9 +18,9 @@ public class Car {
         CarItem item = car.get(id);
         if (item == null) {
             car.put(id , carItem);
-        } else {
+        } /*else {
             item.setQuantity(item.getQuantity() + carItem.getQuantity());
-        }
+        }*/
     }
     
     public void removeGood(Integer id){
@@ -31,4 +32,24 @@ public class Car {
             car.clear();
         }
     }
+    
+    public Integer getCount(){
+        int count = 0;
+        Collection<CarItem> carItems = car.values();
+        for (CarItem item :carItems) {
+            count += item.getQuantity();
+        }
+        return count;
+    }
+    
+    public double getTotalMoney(){
+        int totalPrice = 0;
+        //获取Map中所有的CartItem
+        Collection<CarItem> carItems = car.values();
+        for (CarItem item : carItems) {
+            totalPrice += item.getMoney();
+        }
+        return totalPrice;
+    }
+    
 }

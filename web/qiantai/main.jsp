@@ -59,7 +59,7 @@
     	<div class="blank5"></div>
 		<!--左侧购物车-->
 		<div class="cart" id="ECS_CARTINFO">
- 			<a href="flow.php.htm" title="查看购物车">您的购物车中有 0 件商品，总计金额 ￥0.00元。</a>
+ 			<a href="flow.jsp" title="查看购物车">您的购物车中有 ${car.count} 件商品，总计金额 ￥${car.totalMoney}元。</a>
 		</div>
 		<div class="blank5"></div>
 		<!--左侧分类栏-->

@@ -52,7 +52,7 @@ public class UserServlet extends HttpServlet {
         User user = new User(username,password,null,null,null);
         boolean b = userService.checkUser(user);
         if (b){
-            response.sendRedirect("main.jsp");
+            response.sendRedirect("goodSvl?method=queryGood");
         }else {
             response.getWriter().print("<script>window.history.back()</script>");
         }
@@ -66,7 +66,7 @@ public class UserServlet extends HttpServlet {
         User user = new User(username,password,null,email,qqcode);
         boolean b = userService.addUser(user);
         if (b){
-            response.sendRedirect("main.jsp");
+            response.sendRedirect("goodSvl?method=queryGood");
         }else {
             request.getSession().setAttribute("info","注册失败!");
             request.getRequestDispatcher("register.jsp").forward(request,response);

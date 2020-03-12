@@ -5,9 +5,15 @@
 <title></title>
 <link href="css/style.css" rel="stylesheet" type="text/css" />
 	<script>
-		function changeNum(id,num) {
-			window.href = "goodSvl?method=addCar&id="+id+"&quantity="+num;
+		function clearCar() {
+		    var flag = confirm("是否情况购物车!");
+		    if (flag){
+                location.href = "goodSvl?method=clear";
+            } 
 		}
+		function changeNum(id, num) {
+            location.href = "goodSvl?method=changeQuantity&id="+id+"&quantity="+num;
+        }
 	</script>
 </head>
 <body>
@@ -31,10 +37,10 @@
 
 <!--顶层功能导航栏-->
 <div id="mainNav" class="clearfix">
-	<a href="main.jsp" class="cur">首页<span></span></a>
+	<a href="goodSvl?method=queryGood" >首页<span></span></a>
 	<a href="###">买家必看<span></span></a>
 	<a href="###">优惠活动<span></span></a>
-	<a href="flow.jsp">查看购物车<span></span></a>
+	<a href="flow.jsp" class="cur">查看购物车<span></span></a>
 	<a href="###">报价单<span></span></a>
 	<a href="###">留言板<span></span></a>
 	<a href="###">团购商品<span></span></a>
@@ -68,17 +74,19 @@
 						<input type="text" size="5" value="${entry.value.quantity}" onblur="changeNum(${entry.value.good.id},this.value)"/>
 					</td>
 					<td bgcolor="#ffffff" align="center">${entry.value.money}</td>
-					<td bgcolor="#ffffff" align="center"><a href="##">删除</a></td>
+					<td bgcolor="#ffffff" align="center">
+                        <a href="goodSvl?method=deleteItem&id=${entry.value.good.id}">删除</a>
+                    </td>
 				</tr>
 			</c:forEach>
 		</table>
 		<table width="99%" align="center" border="0" cellpadding="5" cellspacing="1" bgcolor="#dddddd">
 			<tr>
 				<td bgcolor="#ffffff">
-					购物金额总计计 ￥0.00元
+					购物金额总计计 ￥${car.totalMoney}元
 				</td>
 				<td align="right" bgcolor="#ffffff">
-					<input type="button" value="清空购物车" class="bnt_blue_1" onclick="" />
+					<input type="button" value="清空购物车" class="bnt_blue_1" onclick="clearCar()" />
 					<input name="submit" type="submit" class="bnt_blue_1" value="更新购物车" />
 				</td>
 			</tr>
@@ -90,7 +98,7 @@
 				<a href="main.jsp"><img src="images/continue.gif" alt="continue" /></a>
 			</td>
 			<td bgcolor="#ffffff" align="right">
-				<a href="flow.php-step=checkout.htm"><img src="images/checkout.gif" alt="checkout" /></a>
+				<a href="goodSvl?method=calculator&totalMoney=${car.totalMoney}"><img src="images/checkout.gif" alt="checkout" /></a>
 			</td>
 		</tr>
 	</table>

@@ -18,6 +18,7 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.lang.reflect.Method;
 import java.util.List;
+import java.util.Map;
 
 @WebServlet("/qiantai/goodSvl")
 public class GoodServlet extends HttpServlet {
@@ -91,5 +92,36 @@ public class GoodServlet extends HttpServlet {
         car.addGood(carItem);
         session.setAttribute("car",car);
         request.getRequestDispatcher("flow.jsp").forward(request,response);
+    }
+    
+    protected void clear(HttpServletRequest request, HttpServletResponse response) throws Exception {
+        HttpSession session = request.getSession();
+        Car car = (Car) session.getAttribute("car");
+        car.clearCar();
+        response.sendRedirect("flow.jsp");
+    }
+    
+    protected void deleteItem(HttpServletRequest request, HttpServletResponse response) throws Exception {
+        Integer id = Integer.valueOf(request.getParameter("id"));
+        HttpSession session = request.getSession();
+        Car car = (Car) session.getAttribute("car");
+        car.removeGood(id);
+        response.sendRedirect("flow.jsp");
+    }
+    protected void changeQuantity(HttpServletRequest request, HttpServletResponse response) throws Exception {
+        Integer id = Integer.valueOf(request.getParameter("id"));
+        Integer quantity = Integer.valueOf(request.getParameter("quantity"));
+        HttpSession session = request.getSession();
+        Car car = (Car) session.getAttribute("car");
+        Map<Integer, CarItem> carMap = car.getCarMap();
+        CarItem carItem = carMap.get(id);
+        carItem.setQuantity(quantity);
+        response.sendRedirect("flow.jsp");
+    }
+
+    protected void calculator(HttpServletRequest request, HttpServletResponse response) throws Exception {
+        double totalMoney = Double.parseDouble(request.getParameter("totalMoney"));
+        response.getWriter().print("<script>alert('支付成功,总金额为"+totalMoney+"')</script>");
+        response.getWriter().flush();
     }
 }
