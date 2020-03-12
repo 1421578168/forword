@@ -6,7 +6,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
-@WebFilter(filterName = "EncodingFilter",urlPatterns = "/houtai/*")
+@WebFilter(filterName = "EncodingFilter",urlPatterns = "/qiantai/*")
 public class EncodingFilter implements Filter {
     public void destroy() {
     }
